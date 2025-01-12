@@ -1,0 +1,880 @@
+SLIP 1
+Q1. Implement a class Complex which represents the Complex Number data type.
+Implement the following operations: 1. Overloaded operator+ to add two complex
+numbers. 2. Overloaded operator* to multiply two complex numbers. 3. Overloaded <<
+and >> to print and read Complex Numbers.
+#include<iostream.h>
+#include<conio.h>
+class complex{
+ float x;
+ float y;
+ public:
+ complex() {
+x=0;
+y=0;
+ }
+ complex operator+(complex);
+ complex operator*(complex);
+ friend istream &operator >>(istream &input,complex &t) {
+cout<<"\nEnter the real part =";
+input>>t.x;
+cout<<"\nEnter the imaginary part =";
+input>>t.y;
+ }
+ friend ostream &operator <<(ostream &output,complex &t) {
+output<<t.x<<"+"<<t.y<<"i\n";
+ }
+};
+complex complex::operator+(complex c) {
+ complex temp;
+ temp.x=x+c.x;
+ temp.y=y+c.y;
+ return(temp);
+}
+complex complex::operator*(complex c) {
+ complex temp2;
+ temp2.x=(x*c.x)-(y*c.y);
+ temp2.y=(y*c.x)+(x*c.y);
+ return (temp2);
+}
+void main() {
+ complex c1,c2,c3,c4;
+ cout<<"Default constructor value=\n";
+ cout<<c1;
+ cout<<"\nEnter the 1st number ";
+ cin>>c1;
+ cout<<"\nEnter the 2nd number ";
+ cin>>c2;
+ c3=c1+c2;
+ c4=c1*c2;
+ cout<<"\nThe first number is =";
+ cout<<c1;
+ cout<<"\nThe second number is =";
+ cout<<c2;
+ cout<<"\nThe addition is =";
+ cout<<c3;
+ cout<<"\nThe multiplication is =";
+ cout<<c4;
+ getch();
+}
+OR
+Q2. Implement a class CppArray which is identical to a one-dimensional C++ array (i.e.,
+the index set is a set of consecutive integers starting at 0) perform the following
+operations: 1. It performs range checking. 2. It allows one to be assigned to another array
+through the use of the assignment operator(e.g. cp1=cp2) 3. It supports a function that
+returns the size of the array. 4. It allows the reading or printing of array through the use
+of cout and cin.
+#include<iostream.h>
+#include<conio.h>
+class cppArray{
+int a[10], b[10], i, temp, n;
+public:
+void accept();
+void display();
+void range();
+void exchange();
+int size();
+};
+void cppArray :: accept(){
+cout<<"\nEnter Number of Elements in Array: ";
+cin>>n;
+cout<<"\Enter the Array Elements:\n";
+for(int i=0; i<n; i++){
+cout<<"a["<<i<<"]: ";
+cin>>a[i];
+}
+}
+void cppArray :: display(){
+cout<<"\nEntered Array Elements are:\n";
+for(int i=0; i<n; i++){
+cout<<a[i]<<"\t";
+}
+}
+void cppArray :: range(){
+int min=a[0], max=a[0];
+cout<<"\n\nMinimum and Maximum of Array is:";
+for(i=0; i<n; i++){
+if(min>a[i]){
+min=a[i];
+}
+if(max<a[i]){
+max=a[i];
+}
+}
+cout<<"\nMin: "<<min;
+cout<<"\nMax: "<<max;
+}
+void cppArray :: exchange(){
+for(i=0; i<n; i++){
+b[i]=a[i];
+}
+cout<<"\n\nThe Array Elements are Exchanged:\n";
+for(i=0; i<n; i++){
+cout<<"b["<<i<<"] = "<<b[i]<<"\n";
+}
+}
+int cppArray :: size(){
+return n;
+}
+int main(){
+ int t;
+ clrscr();
+ cppArray obj;
+ obj.accept();
+ obj.display();
+ obj.range();
+ obj.exchange();
+ t = obj.size();
+ cout<<"\nThe size of array is: "<<t;
+ getch();
+ return 0;
+}
+SLIP 2 & 12
+Q1. Implement a class Quadratic that represents degree two polynomials i.e., polynomials
+of type ax2+bx+c. The class will require three data members corresponding to a, b and c.
+Implement the following operations: 1. Overloaded operator + to add two polynomials of
+degree2. 2. Overloaded << and >> to print and read polynomials. 4. A function eval that
+computes the value of a polynomial for a given value of x.
+#include<iostream.h>
+#include<conio.h>
+class quadratic{
+public:
+ int a,b,c;
+ void get() {
+ cout<<"\nEnter value for a: ";
+ cin>>a;
+ cout<<"Enter value for b: ";
+ cin>>b;
+ cout<<"Enter value for c: ";
+ cin>>c;
+ }
+ void show() {
+ cout<<a<<"x2+"<<b<<"x+"<<c;
+ }
+ quadratic operator +(quadratic &p) {
+ quadratic res;
+ res.a=a+p.a;
+ res.b=b+p.b;
+ res.c=c+p.c;
+ return res;
+ }
+ void eval(){
+ quadratic res;
+ int x;
+ cout<<"\nEnter value for x";
+ cin>>x;
+ a=a*(x*x);
+ b=b*x;
+ c=c;
+ cout<<"Result: "<<a+b+c;
+ }
+ friend ostream &operator<<(ostream &out, quadratic &p);
+ friend istream &operator>>(istream &in, quadratic &p);
+};
+ostream &operator<<(ostream &out, quadratic &p){
+out<<p.a<<"x2+"<<p.b<<"x+"<<p.c;
+return out;
+}
+istream &operator >>(istream &in, quadratic &p){
+cout<<"\nEnter value for a: ";
+in>>p.a;
+cout<<"Enter value for b: ";
+in>>p.b;
+cout<<"Enter value for c: ";
+in>>p.c;
+return in;
+}
+void main(){
+quadratic a,b,c;
+clrscr();
+cout<<"\nEnter First Polynomial";
+cin>>a;
+cout<<"\nEnter Second Polunomial";
+b.get();
+cout<<"\nPolynomial 1: ";
+cout<<a;
+cout<<"\nPolynomial 2: ";
+b.show();
+c=a+b;
+cout<<"\nAddition: ";
+c.show();
+cout<<"\n\nEvaluation of 1st Expression: ";
+a.eval();
+getch();
+}
+OR
+Q2. Write a C++ program create a calculator for an arithmetic operator (+, -, *, /). The
+program should take two operands from user and performs the operation on those two
+operands depending upon the operator entered by user. Use a switch statement to select
+the operation. Finally, display the result.
+#include<iostream.h>
+#include<conio.h>
+void main(){
+float num1, num2, sum;
+char op, loop;
+clrscr();
+do{
+ cout<<"\n----- Arithmetic Calculator ------\n";
+ cout<<"\nEnter First Number: ";
+ cin>>num1;
+ cout<<"Enter Second Number: ";
+ cin>>num2;
+ cout<<"Enter the Operator (+, -, *, /): ";
+ cin>>op;
+ switch(op){
+ case '+':
+ sum = num1+num2;
+ cout<<"Addition is: "<<sum;
+ break;
+ case '-':
+ sum = num1-num2;
+ cout<<"Substraction is: "<<sum;
+ break;
+ case '*':
+ sum = num1*num2;
+ cout<<"Multiplication is: "<<sum;
+ break;
+ case '/':
+ sum = num1/num2;
+ cout<<"Division is: "<<sum;
+ break;
+ default:
+ cout<<"Entered operator is not valid";
+ }
+ cout<<"\n\nDo another(y/n): ";
+ cin>>loop;
+ if(loop == 'n'){
+ cout<<"Thank You!";
+ cout<<"\nEnter any key to Exit";
+ }
+}while(loop == 'y');
+getch();
+}
+SLIP 3 & 14
+Q1. Develop an object oriented program in C++ to create a database of student
+information system containing the following information: Name, Roll number, Class,
+division, Date of Birth, Blood group, Contact address, telephone number, driving license
+no. etc Construct the database with suitable member functions for initializing and
+destroying the data viz constructor, default constructor, Copy constructor, destructor,
+static member functions, friend class, this pointer
+#include<iostream.h>
+#include<string.h>
+class person_additional_info
+{
+ char address[20],license[20],insurance[20];
+ long int contact;
+public:
+ person_additional_info() //Default constructor
+ {
+ strcpy(address,"XYZ");
+ strcpy(license,"XY-0000000000");
+ strcpy(insurance,"XY00000000X");
+ contact=000000000;
+ }
+ ~person_additional_info() //Destructor
+ {
+ cout<<"I am in Destructor";
+ }
+ friend class person;
+};
+class person
+{
+ char name[20], dob[10], blood[10];
+ float ht,wt;
+ static int count; // Static variable
+ person_additional_info *pai;
+public:
+ person() {
+ strcpy(name,"XYZ");
+ strcpy(dob,"dd/mm/yy");
+ strcpy(blood,"A +");
+ ht=0;
+ wt=0;
+ pai=new person_additional_info;
+ }
+ person(person*p1)
+ {
+ strcpy(name,p1->name);
+ strcpy(dob,p1->dob);
+ strcpy(blood,p1->blood);
+ ht=p1->ht;
+ wt=p1->wt;
+ pai=new person_additional_info;
+ strcpy(pai->address,p1->pai->address);
+ strcpy(pai->license,p1->pai->license);
+ strcpy(pai->insurance,p1->pai->insurance);
+ pai->contact=p1->pai->contact;
+ }
+ static void showcount()
+ {
+ cout<<"\nNo of records count="<<count<<"\n";
+ }
+ ~person() //Destructor
+ {
+ cout<<"\nI am in Destructor\n";
+ }
+ void getdata(char name[20]);
+ inline void display();
+};
+void person::getdata(char name[20])
+{
+strcpy(this->name,name);
+//this pointer
+cout<<"\n Enter date of birth";
+cin>>dob;
+cout<<"\n Enter blood group";
+cin>>blood;
+cout<<"\n Enter height";
+cin>>ht;
+cout<<"\n Enter weight";
+cin>>wt;
+cout<<"\n Enter address";
+cin>>pai->address;
+cout<<"\n Enter Licence number";
+cin>>pai->license;
+cout<<"\n Enter Insurance policy number";
+cin>>pai->insurance;
+cout<<"\n Enter Contact number";
+cin>>pai->contact;
+count++;
+}
+void person::display()
+{
+cout<<"\t"<<name;
+cout<<"\t"<<dob;
+cout<<"\t"<<blood;
+cout<<"\t"<<ht;
+cout<<"\t"<<wt;
+cout<<"\t"<<pai->address;
+cout<<"\t"<<pai->license;
+cout<<"\t"<<pai->insurance;
+cout<<"\t"<<pai->contact;
+}
+int person::count;
+int main()
+{
+ person *p1,*p2;
+ int ch;
+ p1=new person;
+ p2=new person(p1);
+ cout<<"\tName";
+ cout<<"\tDob";
+ cout<<"\tBlood";
+ cout<<"\tHt";
+ cout<<"\tWt";
+ cout<<"\tAddress";
+ cout<<"\tLicense";
+ cout<<"\tInsurance";
+ cout<<"\tContact";
+ cout<<endl;cout<<"Default Constructor Value \n";
+ p1->display();
+ cout<<"\n";
+ cout<<"Copy Constructor Value \n";
+ p2->display();
+ int n;
+ cout<<"\nEnter how many records you want??";
+ cin>>n;
+ person p3[n]; //array of object
+ char name[20];
+ int x=0;
+ do
+ {
+ cout<<"\nWelcome to Personal database system";
+ cout<<"\n1.Enter the record";
+ cout<<"\n2.Display the record";
+ cout<<"\n3.Exit";
+ cin>>ch;
+ switch(ch)
+ {
+ case 1:
+ {
+ cout<<"\nEnter the Name ";
+ cin>>name;
+ p3[x].getdata(name);
+ person::showcount(); // calls static function
+ x++;
+ break;
+ }
+ case 2:
+ {
+ cout<<"\tName";
+ cout<<"\tDob";
+ cout<<"\tBlood";
+ cout<<"\tHt";
+ cout<<"\tWt";
+ cout<<"\tAddress";
+ cout<<"\tLicense";
+ cout<<"\tInsurance";
+ cout<<"\tContact";
+ for(int i=0;i<n;i++)
+ {
+ cout<<"\n";
+ p3[i].display(); //calls inline function
+ }
+ break;
+ }
+ }
+ }while(ch!=3);
+ delete p1; //dynamic memory de-allocation
+ delete p2;
+ return 0;
+}
+OR
+Q2.Create a class template to represent a generic vector. Include following member
+functions: To create the vector. To modify the value of a given element. To multiply by a
+scalar value. To display the vector in the form (10,20,30,…)
+#include<iostream.h>
+#include<conio.h>
+#include<stdlib.h>
+template<class T>
+class vector
+ {
+ T v[20];
+ int size;
+ public:
+ void create();
+ void display();
+ void multiply();
+ void modify();
+ };
+ template<class T>
+ void vector<T>::create()
+ {
+ int i;
+ T value;
+ char ans;
+ size=0;
+ do{
+ cout<<"enter the index:";
+ cin>>i;
+ cout<<"enter the value:";
+ cin>>value;
+ v[i]=value;
+ size++;
+ cout<<"Do you want more elements? (y/n)!";
+ cin>>ans;
+ }while(ans=='y' || ans=='Y');
+ }
+ template<class T>
+ void vector<T>::display()
+ {
+ int i;
+ cout<<"Size of vector"<<size<<endl;
+ cout<<"Elements of vector are:"<<endl;
+ cout<<"(";
+ for(i=1; i<size+1;i++)
+ {
+ cout<<v[i]<<",";
+ }
+ cout<<")";
+ }
+ template<class T>
+ void vector<T>::multiply()
+ {
+ int i;
+ int scalarval;
+ cout<<"enter the scalar value for multiplication:";
+ cin>>scalarval;
+ for(i=1;i<size+1;i++)
+ {
+ v[i]=v[i] * scalarval;
+ }
+ }
+ template<class T>
+ void vector<T>::modify()
+ {
+ int i;
+ int newval;
+ cout<<"Enter the index to modify:"<<endl;
+ cin>>i;
+ cout<<"enter the new value:";
+ cin>>newval;
+ v[i]=newval;
+ }
+ int main()
+ {
+ int choice;
+ clrscr();
+ vector<int>obj;
+ do{
+ cout<<"\n\n---------PROGRAM FOR TEMPLATE CLASS---------"<<endl;
+ cout<<"\n --MAIN MENU--"<<endl;
+ cout<<"\n 1.CREATE:"<<endl;
+ cout<<"\n 2.DISPLAY:"<<endl;
+ cout<<"\n 3.MULTIPLY:"<<endl;
+ cout<<"\n 4.MODIFY:"<<endl;
+ cout<<"\n 5.EXIT:"<<endl;
+ cout<<"\n Enter your choice:"<<endl;
+ cin>>choice;
+ switch(choice){
+ case 1:obj.create();
+break;
+ case 2:obj.display();
+break;
+ case 3:obj.multiply();
+break;
+ case 4:obj.modify();
+break;
+ default:
+ cout<<"\n Invalid choice..!"<<endl;
+ }
+ }while(choice!=5);
+ getch();
+ return 0;
+}
+SLIP 4 & 15
+Q1. Create a class Rational Number (fractions) with the following capabilities:a) Create
+a constructor that prevents a 0 denominator in a fraction, reduces or simplifies fractions
+that are not in reduced form and avoids negative denominators.b) Overload the addition,
+subtraction, multiplication and division operators for this class.c) Overload the relational
+and equality operators for this class.
+#include<iostream.h>
+#include<conio.h>
+class a
+{
+ int i,n,d,sn,sd,cond;
+public:
+ void getdata()
+ {
+cout<<"Enter the numerator"<<endl;
+cin>>n;
+cout<<"Enter the denominator"<<endl;
+cin>>d;
+ }
+ void operator+(a a1)
+ {
+if(a1.d!=d)
+{
+sn=(a1.n*d)+(n*a1.d);
+sd=(a1.d)*(d);
+}
+else
+{
+ sn=a1.n+n;
+ sd=a1.d;
+}
+if(sn>sd)
+{
+ cond=sd;
+}
+else if(sd>sn)
+{
+ cond=sn;
+}
+ }
+ void sum()
+ {
+for(i=2;i<=cond;i++)
+ {
+ if(sn%i==0 && sd%i==0)
+ {
+ sn=sn/i;
+ sd=sd/i;
+ }
+ }
+ cout<<"Sum is "<<sn<<"/"<<sd<<endl;
+ }
+ a operator-(a a1)
+ {
+ a a3;
+ if(a1.d!=d)
+ {
+ a3.sn=(a1.n*d)-(n*a1.d);
+ a3.sd=(a1.d)*(d);
+ }
+ else
+ {
+ a3.sn=a1.n-n;
+ a3.sd=a1.d;
+ }
+ return a3;
+ }
+ void sub()
+ {
+ if(sn>sd)
+ {
+ cond=sd;
+ }
+ else if(sd>sn)
+ {
+ cond=sn;
+ }
+for(i=2;i<=cond;i++)
+ {
+ if(sn%i==0 && sd%i==0)
+ {
+ sn=sn/i;
+ sd=sd/i;
+ }
+ }
+ cout<<"Subtraction is "<<sn<<"/"<<sd<<endl;
+ }
+ a operator /(a a1)
+ {
+ a a4;
+ a4.sn=a1.n*d;
+ a4.sd=a1.d*n;
+ return a4;
+ }
+ void div()
+ {
+ if(sn>sd)
+ {
+ cond=sd;
+ }
+ else if(sd>sn)
+ {
+ cond=sn;
+ }
+ else if(sn==sd)
+ {
+ sn=1;
+ sd=1;
+ }
+for(i=2;i<=cond;i++)
+ {
+ if(sn%i==0 && sd%i==0)
+ {
+ sn=sn/i;
+ sd=sd/i;
+ }
+ }
+ cout<<"Division is "<<sn<<"/"<<sd<<endl;
+ }
+ a operator*(a a1)
+ {
+ a a5;
+ a5.sn=a1.n*n;
+ a5.sd=a1.d*d;
+ return a5;
+ }
+ void mul()
+ {
+ if(sn>sd)
+ {
+ cond=sd;
+ }
+ else if(sd>sn)
+ {
+ cond=sn;
+ }
+for(i=2;i<=cond;i++)
+ {
+ if(sn%i==0 && sd%i==0)
+ {
+sn=sn/i;
+sd=sd/i;
+ }
+}
+cout<<"Multiplication - "<<sn<<"/"<<sd<<endl;
+ }
+};
+void main()
+{
+ a a1,a2,a3,a4,a5,a6;
+ a1.getdata();
+ a2.getdata();
+ a2+(a1);
+ a2.sum();
+ a3=a2-(a1);
+ a3.sub();
+ a4=a2/(a1);
+ a4.div();
+ a5=a2*(a1);
+ a5.mul();
+ getch();
+}
+OR
+Q2. Imagine a publishing company which does marketing for book and audio cassette
+versions. Create a class publication that stores the title (a string) and price (type float) of
+a publication. From this class derive two classes: book, which adds a page count (type
+int), and tape, which adds a playing time in minutes (type float).Write a program that
+instantiates the book and tape classes, allows user to enter data and displays the data
+members.
+#include<iostream.h>
+#include<conio.h>
+#include<string.h>
+class Publication{
+private:
+char title[50];
+float price;
+public:
+void get_publication(){
+cout<<"\nPublication name: ";
+cin>>title;
+cout<<"Price: ";
+cin>>price;
+}
+void show_publication(){
+cout<<"\nPublication name: "<<title<<endl;
+cout<<"Price: "<<price<<endl;
+}
+};
+class Book : public Publication{
+int page_count;
+public:
+void get_book(){
+cout<<"Enter page count: ";
+cin>>page_count;
+}
+void show_book(){
+cout<<"Page count: "<<page_count<<endl;
+}
+};
+class Tape: public Publication{
+float tape_time;
+public:
+void get_tape(){
+cout<<"Enter play time(in min): ";
+cin>>tape_time;
+}
+void show_tape(){
+cout<<"Playing time(in min): "<<tape_time<<endl;
+}
+};
+void main(){
+Book b1;
+Tape t1;
+clrscr();
+cout<<"----- Enter book detail -----"<<endl;
+b1.get_publication();
+b1.get_book();
+cout<<"\n----- Enter tape detail ----- "<<endl;
+t1.get_publication();
+t1.get_tape();
+cout<<"\n----- Book details -----"<<endl;
+b1.show_publication();
+b1.show_book();
+cout<<"\n----- Tape Details -----"<endl;
+t1.show_publication();
+t1.show_tape();
+getch();
+}
+SLIP 5 & 16
+Q1. Write a function in C++ to count and display the number of lines not starting with
+alphabet 'A' present in a text file "STORY.TXT".
+#include<iostream.h>
+#include<conio.h>
+#include<fstream.h>
+int main() {
+clrscr();
+ifstream ob;
+ob.open("abc.txt");
+char s[100];
+int cnt=0;
+ob.getline(s,100);
+while(!ob.eof())
+{
+ob.getline(s,100);
+if(s[0]!='a'&&s[0]!='A')
+cnt++;
+}
+ob.close();
+cout<<"\n\n*************************************************\n";
+cout<<"\nThe no lines which do not start with A are : "<<cnt;
+getch();
+return 0;
+}
+OR
+Q2. Write C++ Program with base class convert declares two variables, val1 and val2,
+which hold the initial and converted values, respectively. It also defines the functions
+getinit( )and getconv( ), which return the initial value and the converted value. These
+elements of convert are fixed and applicable to all derived classes that will inherit convert.
+However, the function that will actually perform the conversion, compute( ), is a pure
+virtual function that must be defined by the classes derived from convert. The specific
+nature of compute( ) will be determined by what type of conversion is taking place
+#include<iostream.h>
+#include<conio.h>
+class Convert
+{
+protected:
+double val1,val2;
+public:
+Convert(double init)
+{
+val1=init;
+val2=0.0;
+}
+double getinit()
+{
+return val1;
+}
+double getconv()
+{
+return val2;
+}
+virtual void compute()=0;
+};
+class fc:public Convert
+{
+public:
+fc(double c):Convert(c)
+{
+}
+void compute()
+{
+val2=((val1-32)*5)/9;
+}
+};
+void main()
+{
+clrscr();
+Convert *c;
+float fh;
+cout<<"Enter the temprature in ferahanhite:";
+cin>>fh;
+fc f(fh);
+c=&f;
+cout<<"\nFeranhite:"<<c->getinit();
+c->compute();
+cout<<"\nCelcius:"<<c->getconv();
+getch();
+}
+SLIP 21,22,23
+Q2.Write a program to implement any 5 string library functions. Use switch-case
+statements to execute different cases.
+#include<iostream.h>
+#include<conio.h>
+#include<string.h>
+void main()
+{
+clrscr();
+int choice;
+char str1[20],str2[20];
+cout<<"Enter the first stirng"<<endl;
+cin>>str1;
+cout<<"Enter the second string"<<endl;
+cin>>str2;
+cout<<"Enter choice to perform\n1.Upper\n2.Lower\n3.Cppy\n4.Reverse\n5.Compare";
+cin>>choice;
+switch(choice)
+{
+ case 1:cout<<strupr(str1);
+break;
+ case 2:cout<<strlwr(str1);
+break;
+ case 3:cout<<strlen(str1);
+break;
+ case 4:cout<<strrev(str1);
+break;
+ case 5:cout<<strcmp(str1,str2);
+break;
+ default:cout<<"Enter valid choice";
+}
+getch();
+}
+SLIP 6 SLIP 7 SLIP 8
+Q1. Same As Slip 1 Q2. Q1. Same As Slip 5 Q1. Q1. Same As Slip 3 Q2.
+Q2. Same as Slip 2 Q1. Q2. Same as Slip 4 Q1. Q2. Same as Slip
+4 Q2.
+SLIP 9 & 18 SLIP 10 SLIP 11
+Q1. Same As Slip 5 Q1. Q1. Same As Slip 5 Q2 Q1. Same As Slip1 Q1
+Q2. Same as Slip 3 Q1. Q2. Same As Slip 1 Q2 Q2. Same As Slip5 Q1
+SLIP 13 SLIP 17 SLIP 19
+Q1. Same As Slip4 Q1 Q1. Same As Slip2 Q2 Q1. Same As
+Slip5 Q2
+Q2. Same As Slip1 Q2 Q2. Same As Slip1 Q1 Q2. Same As
+Slip3 Q2
+SLIP 20
+Q1. Same As Slip4 Q2
+Q2. Same As Slip3 Q1
