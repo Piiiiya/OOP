@@ -1,0 +1,97 @@
+                                                            **SLIP 5 & 16** 
+Q1. Write a function in C++ to count and display the number of lines not starting with alphabet 'A' present in a text file "STORY.TXT".  
+#include<iostream.h> 
+#include<conio.h> #include<fstream.h> int main() { 
+ 	clrscr();  	ifstream ob;  	ob.open("abc.txt");  	char s[100];  	int cnt=0;  	ob.getline(s,100); 
+ 	while(!ob.eof()) 
+ 	{ 
+ 	 	 ob.getline(s,100); 
+ 	 	if(s[0]!='a'&&s[0]!='A') 
+ 	 	cnt++;  	} 
+ob.close(); 
+ 	cout<<"\n\n*************************************************\n";  	cout<<"\nThe no lines which do not start with A are : "<<cnt; getch(); return 0; 
+} 
+
+
+
+
+
+OR  
+
+
+
+
+
+
+
+Q2. Write C++ Program with base class convert declares two variables, val1 and val2, which hold the initial and converted values, respectively. It also defines the functions getinit( )and getconv( ), which return the initial value and the converted value. These elements of convert are fixed and applicable to all derived classes that will inherit convert. However, the function that will actually perform the conversion, compute( ), is a pure virtual function that must be defined by the classes derived from convert. The specific nature of compute( ) will be determined by what type of conversion is taking place 
+ 
+#include<iostream.h> #include<conio.h> class Convert 
+{ 
+ protected: 
+ double val1,val2;  	 public:  	 Convert(double init) 
+ 	 { 
+ 	 	 val1=init;  	 	 val2=0.0; 
+ 	 } 
+ 	 double getinit() 
+ 	{ 
+ 	 	 return val1; 
+ 	} 
+ 	 double getconv() 
+ 	 { 
+ 	 	 return val2; 
+ 	 } 
+ 	 virtual void compute()=0; 
+}; 
+class fc:public Convert 
+{ 
+ 	 public: 
+ 	 fc(double c):Convert(c) 
+ 	 { 
+ 	 } 
+ 	 void compute() 
+ 	 { 
+ 	 	 val2=((val1-32)*5)/9; 
+ 	 } 
+}; void main() 
+{ 
+ 	clrscr();  	Convert *c; 
+ 	float fh; 
+ 	cout<<"Enter the temprature in ferahanhite:"; 
+ 	cin>>fh;  	fc f(fh); 
+ 	c=&f; 
+ 	cout<<"\nFeranhite:"<<c->getinit();  	c->compute();  	cout<<"\nCelcius:"<<c->getconv();  	getch(); 
+} 
+ 
+SLIP 21,22,23 
+Q2.Write a program to implement any 5 string library functions. Use switch-case statements to execute different cases. 
+#include<iostream.h> 
+#include<conio.h> #include<string.h> void main() 
+{  clrscr();  int choice;  char str1[20],str2[20]; 
+ 
+ cout<<"Enter the first stirng"<<endl;  cin>>str1; 
+ cout<<"Enter the second string"<<endl;  cin>>str2; 
+ 
+ cout<<"Enter choice to perform\n1.Upper\n2.Lower\n3.Cppy\n4.Reverse\n5.Compare";  cin>>choice; 
+ 
+ switch(choice) 
+ { 
+  case 1:cout<<strupr(str1);  	 break; 
+  case 2:cout<<strlwr(str1);  	 break; 
+  case 3:cout<<strlen(str1); 
+ 	 break; 
+  case 4:cout<<strrev(str1); 
+ 	 break; 
+  case 5:cout<<strcmp(str1,str2); 
+ 	 break; 
+  default:cout<<"Enter valid choice"; 
+ }  getch(); 
+} 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
