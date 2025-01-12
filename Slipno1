@@ -1,0 +1,89 @@
+                                                                       ** SLIP 1 **
+Q1. Implement a class Complex which represents the Complex Number data type. Implement the following operations: 1. Overloaded operator+ to add two complex numbers. 2. Overloaded operator* to multiply two complex numbers. 3. Overloaded << and >> to print and read Complex Numbers.  
+#include<iostream.h> #include<conio.h> class complex{ 
+   float x;     float y;    public:     complex() { 
+ 	x=0;  	y=0; 
+    } 
+    complex operator+(complex);     complex operator*(complex); 
+    friend istream &operator >>(istream &input,complex &t)  { 
+ 	cout<<"\nEnter the real part =";  	input>>t.x; 
+ 	cout<<"\nEnter the imaginary part ="; 
+ 	input>>t.y; 
+    } 
+    friend ostream &operator <<(ostream &output,complex &t) { 
+ 	output<<t.x<<"+"<<t.y<<"i\n"; 
+    } 
+}; 
+complex complex::operator+(complex c) { 
+    complex temp;     temp.x=x+c.x;     temp.y=y+c.y;     return(temp); 
+} 
+complex complex::operator*(complex c) { 
+    complex temp2;     temp2.x=(x*c.x)-(y*c.y);     temp2.y=(y*c.x)+(x*c.y); 
+    return (temp2); 
+} void main() {     complex c1,c2,c3,c4; 
+    cout<<"Default constructor value=\n";     cout<<c1; 
+    cout<<"\nEnter the 1st number "; 
+    cin>>c1; 
+    cout<<"\nEnter the 2nd number "; 
+    cin>>c2;     c3=c1+c2;     c4=c1*c2; 
+    cout<<"\nThe first number is =";     cout<<c1; 
+    cout<<"\nThe second number is ="; 
+    cout<<c2; 
+    cout<<"\nThe  addition is =";     cout<<c3; 
+    cout<<"\nThe multiplication is =";     cout<<c4; 
+ 
+    getch(); 
+ } 
+OR 
+Q2. Implement a class CppArray which is identical to a one-dimensional C++ array (i.e., the index set is a set of consecutive integers starting at 0) perform the following operations: 1. It performs range checking. 2. It allows one to be assigned to another array through the use of the assignment operator(e.g. cp1=cp2) 3. It supports a function that returns the size of the array. 4. It allows the reading or printing of array through the use of cout and cin. 
+#include<iostream.h> 
+#include<conio.h> 
+ 
+class cppArray{  int a[10], b[10], i, temp, n;  public: 
+ 	void accept();  	void display();  	void range();  	void exchange(); 
+ 	int size(); 
+ }; 
+ void cppArray :: accept(){ 
+ 	cout<<"\nEnter Number of Elements in Array: "; 
+ 	cin>>n; 
+ 	cout<<"\Enter the Array Elements:\n";  	for(int i=0; i<n; i++){ 
+ 	 	cout<<"a["<<i<<"]: "; 
+ 	 	cin>>a[i]; 
+ 	} 
+ } 
+void cppArray :: display(){ 
+ 	cout<<"\nEntered Array Elements are:\n"; 
+ 	for(int i=0; i<n; i++){ 
+ 	 	cout<<a[i]<<"\t"; 
+ 	} 
+ } 
+void cppArray :: range(){ 
+ 	int min=a[0], max=a[0];  	cout<<"\n\nMinimum and Maximum of Array is:";  	for(i=0; i<n; i++){ 
+ 	 	if(min>a[i]){ 
+ 	 	 	min=a[i]; 
+ 	 	} 
+ 	 	if(max<a[i]){ 
+ 	 	 	max=a[i]; 
+ 	 	} 
+ 	} 
+ 	cout<<"\nMin: "<<min; 
+ 	cout<<"\nMax: "<<max; 
+ } 
+ void cppArray :: exchange(){  	for(i=0; i<n; i++){ 
+ 	 	b[i]=a[i]; 
+ 	} 
+ 	cout<<"\n\nThe Array Elements are Exchanged:\n";  	for(i=0; i<n; i++){ 
+ 	 	cout<<"b["<<i<<"] = "<<b[i]<<"\n"; 
+ 	} 
+ } 
+ int cppArray :: size(){ 
+ 	return n; 
+ }  int main(){ 
+  int t; 
+  clrscr();   cppArray obj;   obj.accept();   obj.display();   obj.range(); 
+  obj.exchange(); 
+ 
+  t = obj.size(); 
+  cout<<"\nThe size of array is: "<<t; 
+  getch();   return 0;  } 
+ 
